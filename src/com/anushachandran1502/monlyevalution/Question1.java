@@ -5,16 +5,42 @@ import java.util.Scanner;
 public class Question1 {
 	public static void printPattern(int n)
 	{
-		for(int i=1;i<=n;i++)
-		{
-			for(int j=1;j<i;j++)
+		int top=0,bottom=n-1;
+		int left=0,right=n-1,start=1;
+		int[][] arr=new int[n][n];
+		while(top<bottom || left<right)
 			{
-				System.out.println(" ");
+				for(int i=top;i<=bottom;i++)
+					{
+						arr[i][left+i]=start++;
+					}
+				left++;
+				bottom--;
+				for(int j=bottom;j>=top;j--)
+					{
+						arr[i][right]=start++;
+					}
+				right--;
+				for(int k=right;k>=left;k--)
+					{
+						if(i==left&&top!=0)
+						{
+							break;
+						}
+						arr[top][i]=start++;
+					}
+				top++;
+				bottom--;
 			}
-			for(int k=1;k<=n;k++)
-			{
-				
-			}
+		for(int[] line:arr){
+			for(int val:line)
+				{
+					if(val!=0)
+						System.out.printf("%3d",val);
+					else
+						System.out.print("  ");
+				}
+			System.out.println("\n");
 		}
 	}
 	public static void main(String[] args) {
